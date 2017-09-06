@@ -1,7 +1,21 @@
 #!/usr/bin/perl
 
 use Getopt::Std;
-getopts("cvs:");
+getopts("chs:v");
+
+local $usage = 
+    "\n" .
+    "trim-audio Split Audio files by time\n" .
+    "     -c         Just check, don't run splitting.\n" .
+    "     -h         Help message\n" .
+    "     -s <sec>   Split at <sec> seconds instead of 1200.\n" .
+    "     -v         Be verbose.\n" .
+    "\n\n";
+
+if(defined($opt_h)) {
+   printf STDERR $usage;
+   exit -1;
+}
 
 #
 # Build a list of files to check
@@ -34,7 +48,7 @@ foreach $audio_file (@audio_files) {
 
    $file_name = $audio_file;
 
-   if($file_name =~ m/\.([a-z0-9]+)/) {
+   if($file_name =~ m/\.([a-z0-9]+)$/) {
       $file_type = $1;
    }
 
