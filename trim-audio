@@ -1,0 +1,91 @@
+#!/usr/bin/perl
+
+use Getopt::Std;
+getopts("cvs:");
+
+#
+# Build a list of files to check
+#
+$flac_files = `find . -name "*.flac" | sort`;
+@audio_files = split(/\s+/, $flac_files);
+
+$wav_files = `find . -name "*.wav" | sort`;
+@wav_files = split(/\s+/, $wav_files);
+
+push(@audio_files, @wav_files);
+
+
+$ogg_files = `find . -name "*.ogg" | sort`;
+@ogg_files = split(/\s+/, $off_files);
+
+push(@audio_files, @ogg_files);
+
+
+#
+# Split time is 20 minutes.
+#
+$split_time = 1200;
+if(defined($opt_s)) {
+   $split_time = $opt_s;
+}
+
+
+foreach $audio_file (@audio_files) {
+
+   $file_name = $audio_file;
+
+   if($file_name =~ m/\.([a-z0-9]+)/) {
+      $file_type = $1;
+   }
+
+   $file_name =~ s/\.$file_type//;
+
+   #
+   # Check the length of this file.
+   #
+   $seconds = `soxi -D $audio_file`;
+
+   $minutes = sprintf "%5.3f", $seconds / 60.0;
+       
+
+   if(defined($opt_v)) {
+      print STDERR "Checking type $file_type: $audio_file $minutes\n";
+   }
+
+   #
+   # AUDIO logner that 20 minutes.
+   #
+   if($seconds > $split_time) {
+      print "$audio_file $minutes\n";
+
+
+      #
+      # Command to split at 20 min intervals.
+      # Creates new files flac_name-001.flac, flac_name-002.flac, flac_name-003.flac, 
+      #
+      print_run("sox ${audio_file} ${file_name}_.${file_type} trim 0 ${split_time} : newfile : restart");
+
+      #
+      # Delete the original file, it's too long.
+      #
+      print_run("rm $audio_file");
+   }
+}
+
+#
+#
+#
+sub print_run {
+   local ($run_string) = (@_);
+
+   chomp $run_string;
+   
+   print "CMD:$run_string\n";
+
+   #
+   #
+   #
+   unless(defined($opt_c)) {
+      system($run_string);
+   }
+}
