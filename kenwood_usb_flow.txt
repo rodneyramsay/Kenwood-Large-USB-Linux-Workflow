@@ -7,7 +7,8 @@
 #   rename  - Larry Wall's rename program (also called prename).
 #   FLAC    - Using flac encoding here.
 #   
-
+# rename: https://gist.github.com/keedi/721172.js
+#         https://gist.github.com/keedi/721172
 
 ######################################################################
 ######################################################################
