@@ -1,6 +1,6 @@
 # trim-audio
 
-Kenwood Car Audio work flow for linux.
+Kenwood Car Audio USB Dive work flow for linux.
 
 
 trim-audio : Perl script to trim audio files to 20 minutes. Kenwood USB player requires flac 20 minutes or less.
