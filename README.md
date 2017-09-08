@@ -1,4 +1,4 @@
-# trim-audio
+# Kenwood USB flow
 
 Kenwood Car Audio USB Drive work flow for linux.
 
