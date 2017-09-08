@@ -12,11 +12,11 @@ kenwood_usb_flow.txt Description of library prep, USB drive prep, and copying st
 This flow is working for kenwood DPX502BT with 128GB Sandisk Cruzer thumb drive. Also works with SanDisk SD Card Reader.
 
 
-# Required tools:
-#   sox     - sound eXchange for splitting long files. http://sox.sourceforge.net/
-#   rename  - Larry Wall's rename program modified.    https://gist.github.com/zhasm/663538
-#   FLAC    - Using flac encoding here.                https://xiph.org/flac/
-#   
+Required tools:
+   sox     - sound eXchange for splitting long files. http://sox.sourceforge.net/
+   rename  - Larry Wall's rename program modified.    https://gist.github.com/zhasm/663538
+   FLAC    - Using flac encoding here.                https://xiph.org/flac/
+   
 
 
 
