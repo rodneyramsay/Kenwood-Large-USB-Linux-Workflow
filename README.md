@@ -15,7 +15,7 @@ This flow is working for kenwood DPX502BT with 128GB Sandisk Cruzer thumb drive.
    
 Required tools:<br>
    sox     - sound eXchange for splitting long files. http://sox.sourceforge.net/<br>
-   rename  - Larry Wall's rename program modified.    <script src="https://gist.github.com/zhasm/663538.js"></script><br>
+   rename  - Larry Wall's rename program modified.    https://gist.github.com/zhasm/663538<br>
    FLAC    - Using flac encoding here.                https://xiph.org/flac/<br>
    
    
