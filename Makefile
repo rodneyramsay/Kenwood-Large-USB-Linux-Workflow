@@ -10,7 +10,7 @@
 #
 #
 #
-USB_DRIVE = /dev/sdd1
+USB_DEVICE = /dev/sdd1
 VOLUME = td128
 
 
@@ -22,22 +22,26 @@ VOLUME = td128
 # 
 ######################################################################
 
+.PHONEY: all
 all:
 	$(MAKE) prep
 	$(MAKE) check-flac
 	$(MAKE) copy
-
+.PHONEY: prep
 prep:
 	$(MAKE) fix-names
 	$(MAKE) fix-length
 
+.PHONEY: copy
 copy:
 	$(MAKE) format-usb
+	$(MAKE) mount
 	$(MAKE) copy-files
 
 #
 # Rename files and folders to be alpha numeric
 #
+.PHONEY: fix-names
 fix-names :
 	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*
 	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*/*
@@ -50,12 +54,15 @@ fix-names :
 # First use -c to check for long files.
 # Then run with splitting if needed.
 #
+.PHONEY: fix-length
 fix-length:
-	~/trim-audio
+	cd ./Music; \
+	../trim-audio
 
 #
 # Check FLAC files. FLAC errors cause the player to crash.
 #
+.PHONEY: check-flac
 check-flac:
 	find ./Music -name "*.flac" -exec flac -wst '{}' \;
 
@@ -99,22 +106,37 @@ check-flac:
 #
 # format FAT32 file system.
 #
+.PHONEY: format-usb
 format-usb:
-	sudo mkfs.vfat -v -F 32 -n $(VOLUME) $(USB_DRIVE)
-
+	sudo mkfs.vfat -v -F 32 -n $(VOLUME) $(USB_DEVICE)
 
 
 #
+# Create /media volume name dir
+#
+/media/$(VOLUME):
+	sudo mkdir -p -m 777 /media/$(VOLUME)
+
+#  
 # Mount usb to /media/<DRIVE_NAME>
-# I do this with the file folder but there is also a sudo mount way.
 #
+.PHONEY: mount
+mount:
+	pmount $(USB_DEVICE) $(VOLUME)
+
 
 #
 # Copy files on USB in sorted order.
 # It's ok to add other dirs or dir levels as input to tar.
 # Using * names to get sorted order.
 #  
-copy-files:
+.PHONEY: copy-files
+copy-files: /media/$(VOLUME)
 	tar -cv Music/*/*/*.flac | tar -C /media/$(VOLUME) -xv
 
-
+#
+# 
+#
+.PHONEY: unmount
+unmount:
+	pumount $(VOLUME)
