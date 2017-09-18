@@ -4,7 +4,7 @@
 #   sox     - sound eXchange for splitting long files.
 #   rename  - Larry Wall's rename program (also called prename).
 #   FLAC    - Using flac encoding here.
-#   pmount  - mount usb in media fromcommand line.
+#   pmount  - mount usb in media from command line.
 #   
 
 
