@@ -1,6 +1,6 @@
 # Kenwood USB flow
 
-Kenwood Car Audio USB Drive work flow for linux. This flow is centered on flac lossless data.
+Kenwood Car Audio USB Drive work flow for Linux. This flow is centered on FLAC lossless data.
 
 
 trim-audio : Perl script to trim audio files to 20 minutes. Kenwood USB player requires flac 20 minutes or less.
@@ -9,7 +9,12 @@ Makefile : Make file to run flow steps.
 
 kenwood_usb_flow.txt Description of library prep, USB drive prep, and copying steps.
 
-This flow is working for kenwood DPX502BT with 128GB Sandisk Cruzer thumb drive. Also works with SanDisk SD Card Reader.
+This flow is working for Kenwood DPX502BT with 128GB Sandisk Cruzer
+thumb drive. Also works with SanDisk SD Card Reader.
+
+Maximum resolution working so far is 24bit 48kHz. Player can nearly
+handle 24bit/96kHz but it's giving dropouts at that rate with my
+setup. Maybe with a different USB drive I can get up to 24bit/96kHz.
 
 <hl>
    

@@ -44,9 +44,9 @@ copy:
 #
 .PHONEY: fix-names
 fix-names :
-	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*
-	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*/*
-	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*/*/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*/*
 
 
 #
@@ -133,7 +133,7 @@ mount:
 #  
 .PHONEY: copy-files
 copy-files: /media/$(VOLUME)
-	tar -cv Music/*/*/*.flac | tar -C /media/$(VOLUME) -xv
+	tar -cv `find ./Music -name "*.flac" -print | sort` | tar -C /media/$(VOLUME) -xv
 
 #
 # 
