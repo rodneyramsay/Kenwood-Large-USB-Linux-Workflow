@@ -2,7 +2,6 @@
 
 Kenwood Car Audio USB Drive work flow for Linux. This flow is centered on FLAC lossless data.
 
-
 trim-audio : Perl script to trim audio files to 20 minutes. Kenwood USB player requires flac 20 minutes or less.
 
 Makefile : Make file to run flow steps.
