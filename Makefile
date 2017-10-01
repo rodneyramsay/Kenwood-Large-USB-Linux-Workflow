@@ -13,7 +13,7 @@
 #
 #
 USB_DEVICE = /dev/sdd1
-VOLUME = td128
+VID = td128
 
 
 ######################################################################
@@ -110,21 +110,21 @@ check-flac:
 #
 .PHONEY: format-usb
 format-usb:
-	sudo mkfs.vfat -v -F 32 -n $(VOLUME) $(USB_DEVICE)
+	sudo mkfs.vfat -v -F 32 -n $(VID) $(USB_DEVICE)
 
 
 #
-# Create /media volume name dir
+# Create /media vid name dir
 #
-/media/$(VOLUME):
-	sudo mkdir -p -m 777 /media/$(VOLUME)
+/media/$(VID):
+	sudo mkdir -p -m 777 /media/$(VID)
 
 #  
 # Mount usb to /media/<DRIVE_NAME>
 #
 .PHONEY: mount
 mount:
-	pmount $(USB_DEVICE) $(VOLUME)
+	pmount $(USB_DEVICE) $(VID)
 
 
 #
@@ -133,12 +133,12 @@ mount:
 # Using * names to get sorted order.
 #  
 .PHONEY: copy-files
-copy-files: /media/$(VOLUME)
-	tar -cv `find ./Music -name "*.flac" -print | sort` | tar -C /media/$(VOLUME) -xv
+copy-files: /media/$(VID)
+	tar -cv `find ./Music -name "*.flac" -print | sort` | tar -C /media/$(VID) -xv
 
 #
 # 
 #
 .PHONEY: unmount
 unmount:
-	pumount $(VOLUME)
+	pumount $(VID)
