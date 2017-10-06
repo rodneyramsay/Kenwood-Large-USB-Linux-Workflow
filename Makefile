@@ -43,11 +43,14 @@ copy:
 #
 # Rename files and folders to be alpha numeric
 #
+# Music/<Genre>/<Artist>/<Album>/<track>.flac
+#
 .PHONEY: fix-names
 fix-names :
 	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*
 	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*
 	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*/*/*
 
 
 #
