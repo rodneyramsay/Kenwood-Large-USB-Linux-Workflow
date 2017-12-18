@@ -5,10 +5,8 @@ getopts("chs:v");
 
 local $usage = 
     "\n" .
-    "trim-audio Split Audio files by time\n" .
-    "     -c         Just check, don't run splitting.\n" .
+    "cut96 Reduce 96KHz files to 48KHz\n" .
     "     -h         Help message\n" .
-    "     -s <sec>   Split at <sec> seconds instead of 1200.\n" .
     "     -v         Be verbose.\n" .
     "\n\n";
 
