@@ -1,0 +1,85 @@
+#!/usr/bin/perl
+
+use Getopt::Std;
+getopts("chs:v");
+
+local $usage = 
+    "\n" .
+    "trim-audio Split Audio files by time\n" .
+    "     -c         Just check, don't run splitting.\n" .
+    "     -h         Help message\n" .
+    "     -s <sec>   Split at <sec> seconds instead of 1200.\n" .
+    "     -v         Be verbose.\n" .
+    "\n\n";
+
+if(defined($opt_h)) {
+   printf STDERR $usage;
+   exit -1;
+}
+
+#
+# Build a list of files to check
+#
+$flac_files = `find . -name "*.flac" | sort`;
+@audio_files = split(/\s+/, $flac_files);
+
+
+foreach $audio_file (@audio_files) {
+
+   $file_name = $audio_file;
+
+   if($file_name =~ m/\.([a-z0-9]+)$/) {
+      $file_type = $1;
+   }
+
+   $file_name =~ s/\.$file_type//;
+
+   #
+   # Check the length of this file.
+   #
+   $rate = `soxi -r $audio_file`;
+
+   if(defined($opt_v)) {
+      print STDERR "Checking type $file_type: $audio_file $rate\n";
+   }
+
+   #
+   # AUDIO logner that 20 minutes.
+   #
+   if($rate == 96000) {
+      print "$audio_file $rate\n";
+
+
+      #
+      # Command to split at 20 min intervals.
+      # Creates new files flac_name-001.flac, flac_name-002.flac, flac_name-003.flac, 
+      #
+      print_run("sox ${audio_file} -r 48000 foo.flac");
+
+      #
+      # Delete the original file, it's too long.
+      #
+      print_run("rm $audio_file");
+
+      print_run("mv foo.flac $audio_file");
+
+   }
+}
+
+#
+#
+#
+sub print_run {
+   local ($run_string) = (@_);
+
+   chomp $run_string;
+   
+   print "CMD:$run_string\n";
+
+   #
+   #
+   #
+   unless(defined($opt_c)) {
+      system($run_string);
+   }
+}
