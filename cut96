@@ -38,13 +38,13 @@ foreach $audio_file (@audio_files) {
    $rate = `soxi -r $audio_file`;
 
    if(defined($opt_v)) {
-      print STDERR "Checking type $file_type: $audio_file $rate\n";
+      print STDERR "Checking type $file_type: $audio_file Rate = $rate\n";
    }
 
    #
-   # AUDIO logner that 20 minutes.
+   # AUDIO > 48K
    #
-   if($rate == 96000) {
+   if($rate > 48000) {
       print "$audio_file $rate\n";
 
 
