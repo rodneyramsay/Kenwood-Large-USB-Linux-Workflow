@@ -4,8 +4,6 @@
 #   sox     - sound eXchange for splitting long files.
 #   rename  - Larry Wall's rename program (also called prename).
 #   FLAC    - Using flac encoding here.
-#   pmount  - mount usb in media from command line.
-#
 #   
 
 
@@ -13,7 +11,7 @@
 #
 #
 USB_DEVICE = /dev/sdd1
-VID = td128
+VOLUME = td128
 
 
 ######################################################################
@@ -34,6 +32,9 @@ prep:
 	$(MAKE) fix-names
 	$(MAKE) fix-length
 
+cut-06:
+	../cut96
+
 .PHONEY: copy
 copy:
 	$(MAKE) format-usb
@@ -43,14 +44,12 @@ copy:
 #
 # Rename files and folders to be alpha numeric
 #
-# Music/<Genre>/<Artist>/<Album>/<track>.flac
-#
 .PHONEY: fix-names
 fix-names :
-	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*
-	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*
-	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*/*
-	rename -v 's/[^a-zA-Z_0-9\.\/]+/\-/g' ./Music/*/*/*/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*/*/*
+	rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*/*/*/*
 
 
 #
@@ -113,21 +112,21 @@ check-flac:
 #
 .PHONEY: format-usb
 format-usb:
-	sudo mkfs.vfat -v -F 32 -n $(VID) $(USB_DEVICE)
+	sudo mkfs.vfat -v -F 32 -n $(VOLUME) $(USB_DEVICE)
 
 
 #
-# Create /media vid name dir
+# Create /media volume name dir
 #
-/media/$(VID):
-	sudo mkdir -p -m 777 /media/$(VID)
+/media/$(VOLUME):
+	sudo mkdir -p -m 777 /media/$(VOLUME)
 
 #  
 # Mount usb to /media/<DRIVE_NAME>
 #
 .PHONEY: mount
 mount:
-	pmount $(USB_DEVICE) $(VID)
+	pmount $(USB_DEVICE) $(VOLUME)
 
 
 #
@@ -136,12 +135,12 @@ mount:
 # Using * names to get sorted order.
 #  
 .PHONEY: copy-files
-copy-files: /media/$(VID)
-	tar -cv `find ./Music -name "*.flac" -print | sort` | tar -C /media/$(VID) -xv
+copy-files: /media/$(VOLUME)
+	tar -cv Music/*/*/*.flac | tar -C /media/$(VOLUME) -xv
 
 #
 # 
 #
 .PHONEY: unmount
 unmount:
-	pumount $(VID)
+	pumount $(VOLUME)
