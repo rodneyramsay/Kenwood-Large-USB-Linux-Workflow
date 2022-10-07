@@ -1,0 +1,38 @@
+#!/usr/bin/csh
+
+foreach x (*)
+    echo "$x..."
+    cd $x
+    mkdir wav
+    
+    foreach y (*.flac)
+
+	set z=$y:r
+
+	echo "sox $y wav/${z}.wav"
+	sox $y wav/${z}.wav
+    end
+
+    cd wav
+
+    foreach y (*.wav)
+	set z=$y:r
+
+	echo "sox $y ${z}.flac"
+	sox $y ${z}.flac
+    end
+
+    cd ..
+    echo "mv -v wav/*.flac ."
+    mv -v wav/*.flac .
+
+    echo " rm -rf wav"
+    rm -rf wav
+
+    cd ..
+end
+
+
+      
+   
+      
