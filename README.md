@@ -10,7 +10,7 @@ Makefile : Make file to run flow steps.
 
 kenwood_usb_flow.txt Description of library prep, USB drive prep, and copying steps.
 
-This flow is working for Kenwood DPX502BT with 128GB Sandisk Cruzer
+This flow is working for Kenwood DPX502BT with 256GB Sandisk Cruzer
 thumb drive. Also works with SanDisk SD Card Reader.
 
 Maximum resolution working so far is 24bit 48kHz. Player can nearly
