@@ -21,7 +21,7 @@ setup. Maybe with a different USB drive I can get up to 24bit/96kHz.
    
 Required tools:<br>
    sox     - sound eXchange. Used here for splitting long files. http://sox.sourceforge.net/<br>
-   rename  - Larry Wall's rename program modified.               https://gist.github.com/zhasm/663538<br>
+   rename  - Larry Wall's rename program.                        https://gist.github.com/zhasm/663538<br>
    FLAC    - Using flac encoding.                                https://xiph.org/flac/<br>
    pmount  - Mount to USB under /media from command line         https://anonscm.debian.org/git/pmount/pmount.git<br>
    
