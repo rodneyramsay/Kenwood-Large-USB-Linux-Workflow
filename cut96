@@ -49,7 +49,7 @@ foreach $audio_file (@audio_files) {
 
 
       #
-      # Change rato to 48K
+      # Change rate to 48K
       #
       print_run("sox ${audio_file} -r 48000 foo.flac");
 
