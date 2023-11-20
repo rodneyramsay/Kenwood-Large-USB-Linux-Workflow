@@ -33,7 +33,7 @@ foreach $audio_file (@audio_files) {
    $file_name =~ s/\.$file_type//;
 
    #
-   # Check the length of this file.
+   # Check the sample rate of this file.
    #
    $rate = `soxi -r $audio_file`;
 
@@ -49,8 +49,7 @@ foreach $audio_file (@audio_files) {
 
 
       #
-      # Command to split at 20 min intervals.
-      # Creates new files flac_name-001.flac, flac_name-002.flac, flac_name-003.flac, 
+      # Change rato to 48K
       #
       print_run("sox ${audio_file} -r 48000 foo.flac");
 
