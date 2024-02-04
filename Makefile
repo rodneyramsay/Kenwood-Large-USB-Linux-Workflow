@@ -91,14 +91,17 @@ check-flac:
 # USE EXTREME CARE!
 #
 ######################################################################
-
+# READ COMMENT ABOVE VERY IMPORTANT. YOU CAN DESTROY HARD DIVE. 
+# MAKE SURE YOU KNOW WHAT YOU ARE DOING AND OPERATING ON THE USB FLASH.
+# DOUBLE CHECK YOURSELF.
 #
-# Partition drive
+# Partition drive X. Replace X with your correct drive name.
+# 
 # You want Win95 FAT32 at offset 1024
 # (My commands are in parens, yours may differ slightly)
 # (Use "m" for menu)
 #
-### sudo fdisk /dev/sdd
+### sudo fdisk /dev/sdX
 ###    Create primary partition. (n, p)
 ###    Change partition type to Win95 FAT32 - not LBA (t, l, b)
 ###    Move offset to 1024 (x, b, 1, 1024)
@@ -136,7 +139,7 @@ mount:
 #  
 .PHONEY: copy-files
 copy-files: /media/$(VOLUME)
-	tar -cv Music/*/*/*.flac | tar -C /media/$(VOLUME) -xv
+	tar --sort=name -chv Music | tar -C /media/$(VOLUME) -xv
 
 #
 # 
