@@ -68,8 +68,10 @@ find ./Music -name "*.flac" -exec flac -wst '{}' \;
 # You want Win95 FAT32 at offset 1024
 # (My commands are in parens, yours may differ slightly)
 # (Use "m" for menu)
+# replace /dev/sdX with your proper drive letter (USE EXTREME CARE! USE
+# THE 'mount' COMMAND TO DETERMINE YOUR PROPER DRIVER LETER!!)
 #
-sudo fdisk /dev/sdd
+sudo fdisk /dev/sdX
    Create primary partition. (n, p)
    Change partition type to Win95 FAT32 - not LBA (t, l, b)
    Move offset to 1024 (x, b, 1, 1024)
