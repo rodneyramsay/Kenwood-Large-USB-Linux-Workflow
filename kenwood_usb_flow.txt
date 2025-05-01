@@ -83,7 +83,7 @@ sudo fdisk /dev/sdX
 #
 # format FAT32 file system.
 #
-sudo mkfs.vfat -v -F 32 -n BIGRED /dev/sdd1
+sudo mkfs.vfat -v -F 32 -n BIGRED /dev/sdX1
 
 
 
