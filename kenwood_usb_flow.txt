@@ -27,7 +27,7 @@ rename -v 's/[^a-zA-Z_0-9\.\/]+/_/g' ./Music/*/*/*
 
 
 #
-# Split flac files that are more that 20min long.
+# Split flac files that are more than 20min long.
 # Player crashes on long FLAC files.
 # First use soxi -d to check for long files.
 # Then run with splitting if needed.
