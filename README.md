@@ -3,7 +3,7 @@
 Kenwood Car Audio USB Drive work flow for Linux. This flow is centered on FLAC lossless data.
 
 trim-audio : Perl script to split audio files to 20 minutes. Kenwood
-USB player requires flac 20 minutes or less (BTW one side of an LP record is about 20 minutes). The same time limit applies from 16/44.1k - 24/48k.
+USB player requires flac 20 minutes or less (BTW one side of an LP record is about 20 minutes on a side). The same time limit applies from 16/44.1k - 24/48k.
 
 Makefile : Make file to run flow steps.
 
