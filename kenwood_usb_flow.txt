@@ -91,6 +91,7 @@ sudo mkfs.vfat -v -F 32 -n BIGRED /dev/sdX1
 # Mount usb to /media/<DRIVE_NAME>
 # I do this with the file folder but there is also a sudo mount way.
 #
+sudo udisksctl mount -b /dev/<partition>
 
 #
 # Copy files on USB in sorted order.
